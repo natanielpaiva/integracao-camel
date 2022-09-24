@@ -20,9 +20,10 @@ public class UsuarioController {
     UsuarioRepository usuarioRepository;
 
     @GetMapping
-    public List<Usuario> listUsuario(){
+    public List<Usuario> listUsuario() throws Exception {
         log.info("ENDPOINTUSUARIO");
-        return usuarioRepository.findAll();
+        throw new Exception();
+//        return usuarioRepository.findAll();
     }
 
 }

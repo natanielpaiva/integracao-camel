@@ -28,7 +28,7 @@ Agora vamos para a parte do Camel que vou colocar as seguintes libs no microsser
 
 O pom vai ficar da seguinte forma:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -109,7 +109,7 @@ O pom vai ficar da seguinte forma:
 
 É importante entender que as requisições serão feitas via FeignClient, uma das classes para acessar o microsserviço de Usuário é a UsuarioRepository:
 
-```
+```java
 package exemplo.ms1.orch.repository;
 
 import exemplo.ms1.orch.repository.response.UsuarioResponse;
@@ -128,7 +128,7 @@ public interface UsuarioRepository {
 
 Também vamos criar uma controller para acessar um endpoint específico do nosso orquestrador:
 
-```
+```java
 package exemplo.ms1.orch.controller;
 
 import exemplo.ms1.orch.repository.response.UsuarioResponse;
@@ -157,7 +157,7 @@ public class ExemploController {
 
 Repare que a nossa controller usa um método da UsuarioService:
 
-```
+```java
 package exemplo.ms1.orch.service;
 
 import exemplo.ms1.orch.camel.ExemploCamelRouter;
@@ -182,7 +182,7 @@ public class UsuarioService {
 
 O nosso UsuarioService apenas chama uma rota do Camel, essa rota vai gerenciar as chamadas que precisamos fazer para os ms2 e ms3. Veja como está de fato a rota:
 
-```
+```java
 package exemplo.ms1.orch.camel;
 
 import exemplo.ms1.orch.repository.ImovelRepository;
@@ -254,7 +254,7 @@ public class ExemploCamelRouter extends RouteBuilder {
 
 Repare que nas chamadas que fazemos tanto para o UsuarioRepository(chamando o microsserviço específico) quanto para o ImovelRepository, nós também chamamos um processor. Esse processor serve para tratarmos aquele objeto que recebemos e transformar ele na saída que de fato desejamos, veja como está o ImovelProcessor:
 
-```
+```java
 package exemplo.ms1.orch.camel;
 
 import exemplo.ms1.orch.repository.response.ImovelResponse;
